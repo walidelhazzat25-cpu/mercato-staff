@@ -6,221 +6,329 @@
 <title>Mercato Staff</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --cyan: #00d4ff;
-  --green: #00e676;
-  --teal: #00897b;
-  --dark: #060e1a;
-  --dark2: #0d1f2d;
-  --dark3: #0f2535;
-  --card: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.12);
-  --text: #fff;
-  --muted: rgba(255,255,255,0.45);
-  --red: #e74c3c;
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cyan:#00d4ff;--green:#00e676;--teal:#00897b;
+  --dark:#060e1a;--dark2:#0d1f2d;--dark3:#0f2535;
+  --card:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.12);
+  --text:#fff;--muted:rgba(255,255,255,0.45);
+  --amber:#f59e0b;--red:#e74c3c;
 }
-body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; overflow-x:hidden; }
+body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
 
 /* NAV */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(6,14,26,0.92); backdrop-filter:blur(12px); border-bottom:0.5px solid var(--border); padding:0 20px; height:56px; display:flex; align-items:center; justify-content:space-between; }
-.nav-logo { font-size:18px; font-weight:800; }
-.nav-logo span { color:var(--cyan); }
-.nav-btns { display:flex; gap:8px; }
-.btn-sm { padding:6px 14px; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; border:none; transition:all .2s; }
-.btn-coach { background:rgba(0,230,118,0.15); color:var(--green); border:1px solid rgba(0,230,118,0.3); }
-.btn-club { background:rgba(0,212,255,0.15); color:var(--cyan); border:1px solid rgba(0,212,255,0.3); }
-.btn-coach:hover { background:rgba(0,230,118,0.25); }
-.btn-club:hover { background:rgba(0,212,255,0.25); }
-
-/* PAGES */
-.page { display:none; padding-top:56px; min-height:100vh; }
-.page.active { display:block; }
-
-/* HOME */
-.hero { padding:60px 20px 40px; text-align:center; position:relative; }
-.hero h1 { font-size:32px; font-weight:900; line-height:1.2; letter-spacing:-.02em; margin-bottom:12px; }
-.hero h1 span { color:var(--cyan); }
-.hero p { font-size:14px; color:var(--muted); line-height:1.6; max-width:340px; margin:0 auto 32px; }
-.parcours { display:flex; gap:12px; padding:0 20px 40px; }
-.parcours-card { flex:1; border-radius:14px; padding:24px 18px; cursor:pointer; transition:transform .2s; border:1.5px solid; }
-.parcours-card:hover { transform:translateY(-3px); }
-.parcours-coach { background:rgba(0,137,123,0.15); border-color:#00897b; }
-.parcours-club { background:rgba(0,100,180,0.15); border-color:#0080cc; }
-.parcours-card .icon { font-size:28px; margin-bottom:12px; }
-.parcours-card h3 { font-size:15px; font-weight:700; margin-bottom:6px; }
-.parcours-card p { font-size:11px; color:var(--muted); line-height:1.5; }
-.parcours-card .tag { display:inline-block; margin-top:10px; font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; }
-.tag-green { background:rgba(0,230,118,0.15); color:var(--green); }
-.tag-cyan { background:rgba(0,212,255,0.15); color:var(--cyan); }
-
-/* STATS BAR */
-.stats-bar { display:flex; gap:1px; margin:0 20px 32px; background:var(--border); border-radius:12px; overflow:hidden; }
-.stat { flex:1; background:var(--dark2); padding:14px 10px; text-align:center; }
-.stat-num { font-size:20px; font-weight:800; color:var(--cyan); }
-.stat-label { font-size:9px; color:var(--muted); margin-top:2px; letter-spacing:.06em; }
-
-/* FORMS */
-.form-page { padding:20px; }
-.form-header { margin-bottom:24px; }
-.form-header h2 { font-size:22px; font-weight:800; margin-bottom:6px; }
-.form-header p { font-size:13px; color:var(--muted); }
-.form-section { margin-bottom:20px; }
-.form-section-title { font-size:10px; font-weight:700; letter-spacing:.12em; color:var(--cyan); margin-bottom:12px; }
-.form-group { margin-bottom:14px; }
-.form-group label { display:block; font-size:12px; font-weight:600; color:rgba(255,255,255,0.7); margin-bottom:6px; }
-.form-group input, .form-group select, .form-group textarea {
-  width:100%; background:rgba(255,255,255,0.06); border:0.5px solid var(--border);
-  border-radius:8px; padding:10px 14px; color:var(--text); font-size:13px; font-family:'Inter',sans-serif;
-  outline:none; transition:border .2s;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--cyan); }
-.form-group select option { background:#0d1f2d; }
-.chips { display:flex; flex-wrap:wrap; gap:6px; }
-.chip { padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); transition:all .15s; user-select:none; }
-.chip.selected-green { background:rgba(0,230,118,0.15); border-color:var(--green); color:var(--green); }
-.chip.selected-cyan { background:rgba(0,212,255,0.15); border-color:var(--cyan); color:var(--cyan); }
-.offre-card-select { border:1.5px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:8px; cursor:pointer; transition:all .2s; }
-.offre-card-select.selected { border-color:var(--cyan); background:rgba(0,212,255,0.08); }
-.offre-card-select .offre-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:3px; }
-.offre-card-select .offre-desc { font-size:11px; color:var(--muted); line-height:1.5; }
-.offre-card-select .offre-price { font-size:16px; font-weight:800; color:var(--cyan); margin-top:6px; }
-.btn-submit { width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; border:none; margin-top:8px; transition:all .2s; }
-.btn-submit-green { background:linear-gradient(90deg,#00e676,#00897b); color:#fff; }
-.btn-submit-cyan { background:linear-gradient(90deg,#00d4ff,#0066cc); color:#fff; }
-.btn-submit:hover { opacity:.9; transform:translateY(-1px); }
-.rgpd-check { display:flex; align-items:flex-start; gap:10px; font-size:11px; color:var(--muted); line-height:1.5; margin-top:12px; }
-.rgpd-check input { margin-top:2px; flex-shrink:0; }
-.style-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 14px; cursor:pointer; transition:all .2s; }
-.style-card:hover { border-color:rgba(0,230,118,0.4); }
-.style-card.selected-green { background:rgba(0,230,118,0.1); border-color:var(--green); }
-.style-card-cyan:hover { border-color:rgba(0,212,255,0.4); }
-.style-card-cyan.selected-cyan { background:rgba(0,212,255,0.1); border-color:var(--cyan); }
-.style-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.style-desc { font-size:11px; color:var(--muted); line-height:1.5; }
-
-/* PROFIL COACH */
-.profile-card { margin:20px; background:var(--dark2); border-radius:14px; overflow:hidden; border:0.5px solid var(--border); }
-.profile-header { padding:20px; background:rgba(0,137,123,0.15); border-bottom:0.5px solid var(--border); display:flex; align-items:center; gap:14px; }
-.avatar { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#00e676,#00897b); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; color:#fff; flex-shrink:0; }
-.profile-name { font-size:17px; font-weight:800; }
-.profile-sub { font-size:11px; color:var(--muted); margin-top:2px; }
-.badge-eclair { display:inline-flex; align-items:center; gap:4px; background:rgba(245,158,11,0.2); border:1px solid rgba(245,158,11,0.4); border-radius:6px; padding:2px 8px; font-size:10px; font-weight:700; color:#f59e0b; margin-top:6px; }
-.profile-body { padding:16px 20px; }
-.profile-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:0.5px solid var(--border); }
-.profile-row:last-child { border-bottom:none; }
-.profile-key { font-size:11px; color:var(--muted); }
-.profile-val { font-size:12px; font-weight:600; color:var(--text); text-align:right; max-width:60%; }
-.contact-blocked { display:flex; align-items:center; gap:6px; background:rgba(231,76,60,0.15); border:0.5px solid rgba(231,76,60,0.3); border-radius:8px; padding:10px 14px; margin:14px 0 0; }
-.contact-blocked span { font-size:11px; color:#e74c3c; font-weight:600; }
-.btn-unlock { width:100%; padding:11px; border-radius:8px; background:linear-gradient(90deg,#00d4ff,#0066cc); color:#fff; font-size:12px; font-weight:700; border:none; cursor:pointer; margin-top:8px; }
-
-/* BASE COACHS */
-.search-bar { margin:16px 20px 12px; position:relative; }
-.search-bar input { width:100%; background:var(--dark2); border:0.5px solid var(--border); border-radius:10px; padding:10px 14px 10px 36px; color:var(--text); font-size:13px; font-family:'Inter',sans-serif; outline:none; }
-.search-bar input:focus { border-color:var(--cyan); }
-.search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:14px; }
-.filters { display:flex; gap:6px; padding:0 20px 14px; overflow-x:auto; scrollbar-width:none; }
-.filter-chip { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); transition:all .15s; }
-.filter-chip.active { background:rgba(0,212,255,0.15); border-color:var(--cyan); color:var(--cyan); }
-.coaches-list { padding:0 20px; display:flex; flex-direction:column; gap:10px; padding-bottom:80px; }
-.coach-card { background:var(--dark2); border:0.5px solid var(--border); border-radius:12px; padding:14px 16px; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:12px; }
-.coach-card:hover { border-color:var(--cyan); background:rgba(0,212,255,0.04); }
-.coach-card.boosted { border-color:rgba(245,158,11,0.4); }
-.coach-avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,#00d4ff,#0066cc); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; color:#fff; flex-shrink:0; }
-.coach-avatar.boosted-av { background:linear-gradient(135deg,#f59e0b,#e67e22); }
-.coach-info { flex:1; min-width:0; }
-.coach-name { font-size:13px; font-weight:700; display:flex; align-items:center; gap:6px; }
-.coach-details { font-size:11px; color:var(--muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.coach-right { text-align:right; flex-shrink:0; }
-.dispo-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:4px; }
-.dispo-green { background:#00e676; }
-.dispo-yellow { background:#f59e0b; }
-.dispo-red { background:#e74c3c; }
-
-/* NOTIFS */
-.notif-list { padding:16px 20px; display:flex; flex-direction:column; gap:8px; }
-.notif-item { background:var(--dark2); border:0.5px solid var(--border); border-radius:10px; padding:12px 14px; display:flex; align-items:flex-start; gap:10px; }
-.notif-item.unread { border-color:rgba(0,212,255,0.3); background:rgba(0,212,255,0.04); }
-.notif-dot { width:8px; height:8px; border-radius:50%; background:var(--cyan); flex-shrink:0; margin-top:4px; }
-.notif-dot.read { background:var(--border); }
-.notif-text { font-size:12px; line-height:1.5; color:var(--text); }
-.notif-time { font-size:10px; color:var(--muted); margin-top:3px; }
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,14,26,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{font-size:17px;font-weight:800;}
+.topbar-logo span{color:var(--cyan);}
+.topbar-switch{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;}
 
 /* BOTTOM NAV */
-.bottom-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(6,14,26,0.95); backdrop-filter:blur(12px); border-top:0.5px solid var(--border); display:flex; z-index:100; }
-.nav-item { flex:1; display:flex; flex-direction:column; align-items:center; padding:10px 0 8px; cursor:pointer; transition:all .2s; gap:3px; }
-.nav-item .nav-icon { font-size:20px; }
-.nav-item .nav-label { font-size:9px; font-weight:600; color:var(--muted); letter-spacing:.04em; }
-.nav-item.active .nav-label { color:var(--cyan); }
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,14,26,0.95);backdrop-filter:blur(12px);border-top:0.5px solid var(--border);display:flex;z-index:100;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 0 8px;cursor:pointer;gap:3px;color:var(--muted);}
+.nav-item svg{stroke:var(--muted);}
+.nav-label{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.04em;}
+.nav-item.active svg{stroke:var(--cyan);}
+.nav-item.active .nav-label{color:var(--cyan);}
+
+/* PAGES */
+.page{display:none;padding-top:64px;padding-bottom:80px;min-height:100vh;}
+.page.active{display:block;}
+.padded{padding:20px;}
+.page-title{padding:20px 20px 8px;}
+.page-title h2{font-size:20px;font-weight:800;}
+.page-title p{font-size:12px;color:var(--muted);margin-top:4px;}
+
+/* WELCOME */
+.welcome{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;}
+.welcome-logo{width:80px;height:80px;border-radius:22px;background:linear-gradient(135deg,#00d4ff,#0066cc);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.welcome h1{font-size:28px;font-weight:900;line-height:1.2;letter-spacing:-.02em;margin-bottom:10px;}
+.welcome h1 span{color:var(--cyan);}
+.welcome p{font-size:13px;color:var(--muted);line-height:1.6;max-width:300px;margin:0 auto 40px;}
+.welcome-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px;}
+.welcome-card{border-radius:14px;padding:22px 20px;cursor:pointer;transition:transform .2s;border:1.5px solid;display:flex;align-items:center;gap:16px;text-align:left;}
+.welcome-card:hover{transform:translateY(-2px);}
+.wc-coach{background:rgba(0,137,123,0.15);border-color:#00897b;}
+.wc-club{background:rgba(0,100,180,0.15);border-color:#0080cc;}
+.wc-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.wc-coach .wc-icon{background:rgba(0,230,118,0.15);}
+.wc-club .wc-icon{background:rgba(0,212,255,0.15);}
+.wc-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+.wc-desc{font-size:11px;color:var(--muted);line-height:1.4;}
+.wc-tag{display:inline-block;margin-top:8px;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;}
+.tag-green{background:rgba(0,230,118,0.15);color:var(--green);}
+.tag-cyan{background:rgba(0,212,255,0.15);color:var(--cyan);}
+
+/* CARDS & FORMS */
+.section-title{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--cyan);margin-bottom:10px;margin-top:20px;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,0.06);border:0.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border .2s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--cyan);}
+.form-group select option{background:#0d1f2d;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{padding:6px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .15s;user-select:none;}
+.chip.sel-green{background:rgba(0,230,118,0.15);border-color:var(--green);color:var(--green);}
+.chip.sel-cyan{background:rgba(0,212,255,0.15);border-color:var(--cyan);color:var(--cyan);}
+.style-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s;margin-bottom:8px;}
+.style-card.sel-green{background:rgba(0,230,118,0.1);border-color:var(--green);}
+.style-card.sel-cyan{background:rgba(0,212,255,0.1);border-color:var(--cyan);}
+.style-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.style-ref{opacity:.5;font-weight:400;}
+.style-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.offre-sel{border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s;}
+.offre-sel.active{border-color:var(--cyan);background:rgba(0,212,255,0.08);}
+.offre-sel .offre-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.offre-sel .offre-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.offre-sel .offre-price{font-size:16px;font-weight:800;color:var(--cyan);margin-top:6px;}
+.btn-submit{width:100%;padding:14px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-top:12px;transition:all .2s;}
+.btn-green{background:linear-gradient(90deg,#00e676,#00897b);color:#fff;}
+.btn-blue{background:linear-gradient(90deg,#00d4ff,#0066cc);color:#fff;}
+.rgpd-row{display:flex;align-items:flex-start;gap:10px;font-size:11px;color:var(--muted);line-height:1.5;margin-top:10px;}
+.rgpd-row input{margin-top:2px;flex-shrink:0;}
+
+/* PROFIL COACH */
+.profile-banner{background:linear-gradient(135deg,rgba(0,137,123,0.3),rgba(0,100,180,0.2));padding:28px 20px 20px;border-bottom:0.5px solid var(--border);}
+.profile-av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#00e676,#00897b);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;margin-bottom:12px;}
+.profile-name-big{font-size:20px;font-weight:800;}
+.profile-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.boost-active{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:6px 12px;margin-top:10px;font-size:12px;font-weight:600;color:var(--amber);}
+.info-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;margin:0 20px 12px;overflow:hidden;}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:0.5px solid var(--border);}
+.info-row:last-child{border-bottom:none;}
+.ik{font-size:12px;color:var(--muted);}
+.iv{font-size:12px;font-weight:600;text-align:right;max-width:55%;}
+
+/* BOOST CARD */
+.boost-card{margin:0 20px 12px;border-radius:12px;padding:18px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);}
+.boost-title{font-size:14px;font-weight:700;color:var(--amber);margin-bottom:6px;}
+.boost-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.btn-boost{width:100%;padding:12px;border-radius:10px;background:linear-gradient(90deg,var(--amber),#e67e22);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer;}
+
+/* BASE COACHS */
+.search-wrap{margin:12px 20px;position:relative;}
+.search-wrap input{width:100%;background:var(--dark2);border:0.5px solid var(--border);border-radius:10px;padding:10px 14px 10px 38px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;outline:none;}
+.search-wrap input:focus{border-color:var(--cyan);}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);}
+.filter-row{display:flex;gap:6px;padding:0 20px 12px;overflow-x:auto;scrollbar-width:none;}
+.fchip{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .15s;}
+.fchip.active{background:rgba(0,212,255,0.15);border-color:var(--cyan);color:var(--cyan);}
+.criteres-bar{margin:0 20px 12px;background:rgba(0,212,255,0.06);border:0.5px solid rgba(0,212,255,0.2);border-radius:10px;padding:10px 12px;}
+.critere-tag{background:rgba(0,212,255,0.12);border:0.5px solid rgba(0,212,255,0.3);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:600;color:var(--cyan);display:inline-block;margin:2px;}
+.coaches-list{padding:0 20px;display:flex;flex-direction:column;gap:10px;}
+.coach-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;}
+.coach-card:hover{border-color:var(--cyan);}
+.coach-card.boosted{border-color:rgba(245,158,11,0.4);}
+.coach-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0;}
+.coach-info{flex:1;min-width:0;}
+.coach-name{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.coach-details{font-size:11px;color:var(--muted);margin-top:2px;}
+.compat-wrap{display:flex;align-items:center;gap:6px;margin-top:5px;}
+.compat-bar{flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.compat-fill{height:100%;border-radius:2px;}
+.compat-pct{font-size:10px;font-weight:800;min-width:32px;}
+.compat-label{font-size:9px;color:var(--muted);}
+.coach-right{text-align:right;flex-shrink:0;}
+.coach-right div{font-size:10px;color:var(--muted);}
+.boost-badge{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:4px;padding:1px 5px;font-size:9px;color:var(--amber);font-weight:700;}
+.dispo-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px;}
+
+/* CONTACTS DÉBLOQUÉS */
+.contact-card{background:var(--dark2);border:0.5px solid rgba(0,212,255,0.3);border-radius:12px;padding:14px 16px;margin:0 20px 10px;display:flex;align-items:center;gap:12px;}
+.contact-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;}
+.contact-info{flex:1;}
+.contact-name{font-size:13px;font-weight:700;}
+.contact-detail{font-size:11px;color:var(--muted);margin-top:2px;}
+.contact-btn{font-size:11px;font-weight:600;padding:6px 12px;border-radius:8px;border:none;cursor:pointer;background:rgba(0,212,255,0.15);color:var(--cyan);border:1px solid rgba(0,212,255,0.3);}
+
+/* ABONNEMENT */
+.abo-card{margin:0 20px 14px;border-radius:14px;padding:20px;background:rgba(0,80,170,0.18);border:1.5px solid #0080cc;}
+.abo-title{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:4px;}
+.abo-price{font-size:28px;font-weight:900;color:#fff;margin:6px 0;}
+.abo-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.abo-stat{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;margin:0 20px 10px;display:flex;justify-content:space-between;align-items:center;}
+.abo-stat-label{font-size:12px;color:var(--muted);}
+.abo-stat-val{font-size:14px;font-weight:700;color:var(--text);}
+
+/* NOTIFS */
+.notif-list{padding:0 20px;display:flex;flex-direction:column;gap:8px;}
+.notif-item{background:var(--dark2);border:0.5px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
+.notif-item.unread{border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.04);}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:4px;}
+.notif-dot.read{background:var(--border);}
+.notif-text{font-size:12px;line-height:1.5;}
+.notif-time{font-size:10px;color:var(--muted);margin-top:3px;}
 
 /* MODAL */
-.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:200; align-items:flex-end; }
-.modal-overlay.open { display:flex; }
-.modal { background:var(--dark2); border-radius:20px 20px 0 0; padding:24px 20px 40px; width:100%; max-height:85vh; overflow-y:auto; border-top:0.5px solid var(--border); }
-.modal-handle { width:36px; height:4px; background:var(--border); border-radius:2px; margin:0 auto 20px; }
-.modal-title { font-size:18px; font-weight:800; margin-bottom:16px; }
-.success-screen { text-align:center; padding:40px 20px; }
-.success-icon { font-size:48px; margin-bottom:16px; }
-.success-title { font-size:22px; font-weight:800; margin-bottom:8px; }
-.success-text { font-size:13px; color:var(--muted); line-height:1.6; }
-
-/* SECTION TITLE PAGE */
-.page-title { padding:20px 20px 8px; }
-.page-title h2 { font-size:20px; font-weight:800; }
-.page-title p { font-size:12px; color:var(--muted); margin-top:4px; }
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:flex-end;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--dark2);border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-height:85vh;overflow-y:auto;border-top:0.5px solid var(--border);}
+.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
+.profile-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--border);}
+.profile-row:last-of-type{border-bottom:none;}
+.pk{font-size:11px;color:var(--muted);}
+.pv{font-size:12px;font-weight:600;text-align:right;max-width:60%;}
+.contact-blocked{display:flex;align-items:center;gap:6px;background:rgba(231,76,60,0.1);border:0.5px solid rgba(231,76,60,0.3);border-radius:8px;padding:10px 12px;margin-top:12px;}
+.contact-blocked span{font-size:11px;color:var(--red);font-weight:600;}
+.btn-unlock{width:100%;padding:11px;border-radius:8px;background:linear-gradient(90deg,#00d4ff,#0066cc);color:#fff;font-size:12px;font-weight:700;border:none;cursor:pointer;margin-top:8px;}
+.success-screen{text-align:center;padding:40px 20px;}
+.success-icon{font-size:48px;margin-bottom:16px;}
+.success-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.success-text{font-size:13px;color:var(--muted);line-height:1.6;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Mercato <span>Staff</span></div>
-  <div class="nav-btns">
-    <button class="btn-sm btn-coach" onclick="showPage('coach-signup')">Je suis coach</button>
-    <button class="btn-sm btn-club" onclick="showPage('club-signup')">Je suis club</button>
-  </div>
-</nav>
-
-<!-- PAGE ACCUEIL -->
-<div id="page-home" class="page active">
-  <div class="hero">
-    <h1>Le réseau tactique<br>du <span>football</span></h1>
-    <p>Mise en relation entre coachs qualifiés et clubs amateurs en Île-de-France.</p>
-  </div>
-
-  <div class="stats-bar">
-    <div class="stat"><div class="stat-num" id="stat-coaches">0</div><div class="stat-label">COACHS</div></div>
-    <div class="stat"><div class="stat-num" id="stat-clubs">0</div><div class="stat-label">CLUBS</div></div>
-    <div class="stat"><div class="stat-num">IDF</div><div class="stat-label">RÉGION</div></div>
-  </div>
-
-  <div class="parcours">
-    <div class="parcours-card parcours-coach" onclick="showPage('coach-signup')">
-      <div class="icon">🎽</div>
-      <h3>Tu es coach ?</h3>
-      <p>Inscris-toi gratuitement. Ton profil intègre notre base. Les clubs viennent à toi.</p>
-      <div class="tag tag-green">Gratuit à vie</div>
+<!-- ═══════════════════════════════════ ÉCRAN ACCUEIL ═══ -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome">
+    <div class="welcome-logo">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
     </div>
-    <div class="parcours-card parcours-club" onclick="showPage('club-signup')">
-      <div class="icon">🏟️</div>
-      <h3>Tu es club ?</h3>
-      <p>Accède à notre base de coachs qualifiés. Filtre, consulte, débloque.</p>
-      <div class="tag tag-cyan">Offre de lancement</div>
+    <h1>Mercato <span>Staff</span></h1>
+    <p>Le réseau tactique du football en Île-de-France. Coachs et clubs, enfin réunis.</p>
+    <div class="welcome-cards">
+      <div class="welcome-card wc-coach" onclick="enterAs('coach')">
+        <div class="wc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div class="wc-title">Je suis coach</div>
+          <div class="wc-desc">Inscris-toi gratuitement et laisse les clubs venir à toi.</div>
+          <div class="wc-tag tag-green">Gratuit à vie</div>
+        </div>
+      </div>
+      <div class="welcome-card wc-club" onclick="enterAs('club')">
+        <div class="wc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><rect x="9" y="13" width="6" height="8" rx="1"/></svg>
+        </div>
+        <div>
+          <div class="wc-title">Je suis club</div>
+          <div class="wc-desc">Accède à notre base de coachs qualifiés et trouve le bon profil.</div>
+          <div class="wc-tag tag-cyan">Offre de lancement</div>
+        </div>
+      </div>
     </div>
+    <div style="margin-top:20px;font-size:11px;color:var(--muted)">mercato.staff@gmail.com · Île-de-France</div>
   </div>
 </div>
 
-<!-- PAGE INSCRIPTION COACH -->
-<div id="page-coach-signup" class="page">
-  <div class="form-page">
-    <div class="form-header">
-      <h2>Inscription <span style="color:var(--green)">Coach</span></h2>
-      <p>Rejoins la base · Île-de-France · Gratuit à vie</p>
-    </div>
+<!-- ═══════════════════════════════════ ESPACE COACH ═══ -->
+<div id="screen-coach" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">Mercato <span>Staff</span> <span style="font-size:11px;color:var(--green);font-weight:600;margin-left:6px">Coach</span></div>
+    <div class="topbar-switch" onclick="backToWelcome()">Changer</div>
+  </div>
 
-    <div class="form-section">
-      <div class="form-section-title">ÉTAT CIVIL & CONTACT</div>
+  <!-- Nav coach -->
+  <div class="bottom-nav" id="nav-coach">
+    <div class="nav-item active" onclick="goCoach('profil')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div class="nav-label">MON PROFIL</div>
+    </div>
+    <div class="nav-item" onclick="goCoach('notifs')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <div class="nav-label">NOTIFS</div>
+    </div>
+    <div class="nav-item" onclick="goCoach('boost')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <div class="nav-label">BOOST</div>
+    </div>
+    <div class="nav-item" onclick="goCoach('about')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <div class="nav-label">À PROPOS</div>
+    </div>
+  </div>
+
+  <!-- Page Profil Coach -->
+  <div id="cp-profil" class="page active">
+    <div class="profile-banner">
+      <div class="profile-av">TM</div>
+      <div class="profile-name-big">Thomas M.</div>
+      <div class="profile-sub">Entraîneur Principal · Île-de-France</div>
+      <div class="boost-active">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Badge ⚡ Éclair actif — en recherche active
+      </div>
+    </div>
+    <div style="padding:16px 0 0">
+      <div style="padding:0 20px;margin-bottom:6px"><div class="section-title">MES INFORMATIONS</div></div>
+      <div class="info-card">
+        <div class="info-row"><span class="ik">Diplôme</span><span class="iv">UEFA B</span></div>
+        <div class="info-row"><span class="ik">Style</span><span class="iv">L'Architecte (Guardiola)</span></div>
+        <div class="info-row"><span class="ik">Système</span><span class="iv">4-3-3 / 4-2-3-1</span></div>
+        <div class="info-row"><span class="ik">Niveau max</span><span class="iv">Régional 1</span></div>
+        <div class="info-row"><span class="ik">Catégorie</span><span class="iv">Seniors</span></div>
+        <div class="info-row"><span class="ik">Statut souhaité</span><span class="iv">Salarié temps plein</span></div>
+        <div class="info-row"><span class="ik">Mobilité</span><span class="iv">Toute l'IDF</span></div>
+        <div class="info-row"><span class="ik">Disponibilité</span><span class="iv" style="color:var(--green)">Disponible</span></div>
+        <div class="info-row"><span class="ik">Département</span><span class="iv">93 — Seine-Saint-Denis</span></div>
+      </div>
+      <div style="padding:0 20px;margin-bottom:6px"><div class="section-title">VISIBILITÉ</div></div>
+      <div class="info-card">
+        <div class="info-row"><span class="ik">Vues du profil ce mois</span><span class="iv" style="color:var(--cyan)">12</span></div>
+        <div class="info-row"><span class="ik">Clubs qui t'ont consulté</span><span class="iv" style="color:var(--cyan)">5</span></div>
+        <div class="info-row"><span class="ik">Contacts débloqués sur toi</span><span class="iv" style="color:var(--green)">2</span></div>
+      </div>
+      <div style="padding:0 20px">
+        <button class="btn-submit btn-green" onclick="goCoach('signup')">Modifier mon profil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Notifs Coach -->
+  <div id="cp-notifs" class="page">
+    <div class="page-title"><h2>Notifications</h2><p>Activité sur ton profil</p></div>
+    <div style="height:12px"></div>
+    <div class="notif-list">
+      <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text"><strong>AS Bondy</strong> a consulté ton profil</div><div class="notif-time">Il y a 5 min</div></div></div>
+      <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text"><strong>Red Star FC</strong> a consulté ton profil</div><div class="notif-time">Il y a 2h</div></div></div>
+      <div class="notif-item unread"><div class="notif-dot"></div><div><div class="notif-text">Un club a débloqué ton contact — tu pourrais être contacté prochainement</div><div class="notif-time">Il y a 6h</div></div></div>
+      <div class="notif-item"><div class="notif-dot read"></div><div><div class="notif-text">Ton <strong>Boost Éclair</strong> est actif — profil en haut de la liste</div><div class="notif-time">Il y a 1 jour</div></div></div>
+      <div class="notif-item"><div class="notif-dot read"></div><div><div class="notif-text">Ton profil a bien été ajouté à la base Mercato Staff</div><div class="notif-time">Il y a 3 jours</div></div></div>
+      <div class="notif-item"><div class="notif-dot read"></div><div><div class="notif-text"><strong>CO Vincennes</strong> a consulté ton profil</div><div class="notif-time">Il y a 5 jours</div></div></div>
+    </div>
+  </div>
+
+  <!-- Page Boost Coach -->
+  <div id="cp-boost" class="page">
+    <div class="page-title"><h2>Boost <span style="color:var(--amber)">Éclair</span></h2><p>Signale que tu es disponible</p></div>
+    <div style="padding:16px 0 0">
+      <div class="boost-card">
+        <div class="boost-title">Boost Éclair actif</div>
+        <div class="boost-desc">
+          Ton badge ⚡ Éclair est visible sur ton profil pour tous les clubs abonnés.<br><br>
+          Badge Éclair visible sur ton profil — signal aux clubs que tu es en recherche active et joignable immédiatement.
+        </div>
+        <div style="background:rgba(245,158,11,0.1);border-radius:8px;padding:12px;margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:var(--muted)">Durée restante</span><span style="font-size:12px;font-weight:700;color:var(--amber)">11 jours</span></div>
+          <div style="height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden"><div style="height:100%;width:79%;background:var(--amber);border-radius:3px"></div></div>
+        </div>
+        <button class="btn-boost">Renouveler — 10€ / 2 semaines</button>
+      </div>
+      <div style="padding:0 20px">
+        <div class="section-title">CE QUE LE BOOST T'APPORTE</div>
+        <div class="info-card">
+          <div class="info-row"><span class="ik">Position dans la base</span><span class="iv" style="color:var(--green)">#1 en haut</span></div>
+          <div class="info-row"><span class="ik">Badge visible</span><span class="iv" style="color:var(--amber)">Boost Éclair actif</span></div>
+          <div class="info-row"><span class="ik">Mini-CV dynamique</span><span class="iv" style="color:var(--green)">Généré</span></div>
+          <div class="info-row"><span class="ik">Vues depuis activation</span><span class="iv" style="color:var(--cyan)">+8 vues</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Inscription Coach -->
+  <div id="cp-signup" class="page">
+    <div class="padded">
+      <div style="margin-bottom:22px">
+        <h2 style="font-size:22px;font-weight:800;margin-bottom:5px">Inscription <span style="color:var(--green)">Coach</span></h2>
+        <p style="font-size:13px;color:var(--muted)">Rejoins la base · Île-de-France · Gratuit à vie</p>
+      </div>
+      <div class="section-title">ÉTAT CIVIL & CONTACT</div>
       <div class="form-group"><label>Nom et Prénom *</label><input type="text" placeholder="Ex : Thomas Dupont"></div>
       <div class="form-group"><label>Âge *</label><input type="number" placeholder="Ex : 32"></div>
       <div class="form-group"><label>Ville & Département *</label><input type="text" placeholder="Ex : Bobigny, 93"></div>
@@ -228,628 +336,511 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(6,14,
       <div class="form-group"><label>Email *</label><input type="email" placeholder="ton@email.com"></div>
       <div class="form-group">
         <label>Statut disponibilité *</label>
-        <div class="chips" id="chips-dispo-coach">
-          <div class="chip" onclick="toggleChip(this,'green')">🟢 Disponible</div>
-          <div class="chip" onclick="toggleChip(this,'green')">🟡 À l'écoute</div>
-          <div class="chip" onclick="toggleChip(this,'green')">🔴 Indisponible</div>
+        <div class="chips">
+          <div class="chip" onclick="solo(this,'green')">Disponible</div>
+          <div class="chip" onclick="solo(this,'green')">A l'écoute</div>
+          <div class="chip" onclick="solo(this,'green')">Indisponible</div>
         </div>
       </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">PASSEPORT TECHNIQUE</div>
+      <div class="section-title">PASSEPORT TECHNIQUE</div>
       <div class="form-group"><label>Club actuel *</label><input type="text" placeholder="Ex : AS Bondy"></div>
       <div class="form-group">
         <label>Diplômes *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">Aucun (Bénévole)</div>
-          <div class="chip" onclick="toggleChip(this,'green')">CFF1</div>
-          <div class="chip" onclick="toggleChip(this,'green')">CFF2</div>
-          <div class="chip" onclick="toggleChip(this,'green')">BMF</div>
-          <div class="chip" onclick="toggleChip(this,'green')">BEF</div>
-          <div class="chip" onclick="toggleChip(this,'green')">BEPF</div>
-          <div class="chip" onclick="toggleChip(this,'green')">UEFA B</div>
-          <div class="chip" onclick="toggleChip(this,'green')">UEFA A</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Gardiens</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Prépa Physique</div>
+          <div class="chip" onclick="multi(this,'green')">Aucun</div>
+          <div class="chip" onclick="multi(this,'green')">CFF1</div>
+          <div class="chip" onclick="multi(this,'green')">CFF2</div>
+          <div class="chip" onclick="multi(this,'green')">BMF</div>
+          <div class="chip" onclick="multi(this,'green')">BEF</div>
+          <div class="chip" onclick="multi(this,'green')">BEPF</div>
+          <div class="chip" onclick="multi(this,'green')">UEFA B</div>
+          <div class="chip" onclick="multi(this,'green')">UEFA A</div>
+          <div class="chip" onclick="multi(this,'green')">Gardiens</div>
+          <div class="chip" onclick="multi(this,'green')">Prépa Physique</div>
         </div>
       </div>
       <div class="form-group">
-        <label>Poste(s) recherché(s) *</label>
+        <label>Poste recherché *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">Entraîneur Principal</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Adjoint</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Prépa Physique</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Analyste Vidéo</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Entraîneur Gardiens</div>
-          <div class="chip" onclick="toggleChip(this,'green')">RTJ</div>
+          <div class="chip" onclick="multi(this,'green')">Entraîneur Principal</div>
+          <div class="chip" onclick="multi(this,'green')">Adjoint</div>
+          <div class="chip" onclick="multi(this,'green')">Prépa Physique</div>
+          <div class="chip" onclick="multi(this,'green')">Analyste Vidéo</div>
+          <div class="chip" onclick="multi(this,'green')">Entraîneur Gardiens</div>
+          <div class="chip" onclick="multi(this,'green')">RTJ</div>
         </div>
       </div>
       <div class="form-group">
         <label>Niveau maximum coaché *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">District</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Régional</div>
-          <div class="chip" onclick="toggleChip(this,'green')">National</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Pro</div>
+          <div class="chip" onclick="solo(this,'green')">District</div>
+          <div class="chip" onclick="solo(this,'green')">Régional</div>
+          <div class="chip" onclick="solo(this,'green')">National</div>
+          <div class="chip" onclick="solo(this,'green')">Pro</div>
         </div>
       </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">IDENTITÉ DE JEU</div>
+      <div class="section-title">IDENTITÉ DE JEU</div>
       <div class="form-group">
         <label>Style de management *</label>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div class="style-card" onclick="selectStyle(this,'green')" data-style="Architecte">
-            <div class="style-name">🏗️ L'Architecte <span style="opacity:.5;font-weight:400">— Guardiola</span></div>
-            <div class="style-desc">Possession, construction courte, maîtrise du rythme. Le jeu est organisé à la perfection, chaque joueur a un rôle précis.</div>
-          </div>
-          <div class="style-card" onclick="selectStyle(this,'green')" data-style="Energisant">
-            <div class="style-name">⚡ L'Énergisant <span style="opacity:.5;font-weight:400">— Klopp</span></div>
-            <div class="style-desc">Pressing intense, transitions ultra-rapides, gros volume de courses. L'équipe joue à 100% d'intensité du début à la fin.</div>
-          </div>
-          <div class="style-card" onclick="selectStyle(this,'green')" data-style="General">
-            <div class="style-name">🛡️ Le Général <span style="opacity:.5;font-weight:400">— Simeone</span></div>
-            <div class="style-desc">Bloc compact, rigueur défensive, contre-attaques éclair. Discipliné, difficile à battre, redoutable en transition.</div>
-          </div>
-          <div class="style-card" onclick="selectStyle(this,'green')" data-style="Pragmatique">
-            <div class="style-name">🧠 Le Pragmatique <span style="opacity:.5;font-weight:400">— Ancelotti / Deschamps</span></div>
-            <div class="style-desc">Adaptabilité totale, gestion humaine forte, équilibre. S'adapte aux joueurs disponibles, met l'humain au centre.</div>
-          </div>
-          <div class="style-card" onclick="selectStyle(this,'green')" data-style="Percuteur">
-            <div class="style-name">🔥 Le Percuteur <span style="opacity:.5;font-weight:400">— Bielsa</span></div>
-            <div class="style-desc">Marquage individuel agressif, jeu très vertical vers l'avant. Intensité maximale, pressing haut permanent, spectaculaire.</div>
-          </div>
-        </div>
+        <div class="style-card" onclick="soloStyle(this,'green')"><div class="style-name">L'Architecte <span class="style-ref">— Guardiola</span></div><div class="style-desc">Possession, construction courte, maîtrise du rythme. Chaque joueur a un rôle précis dans un système huilé.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'green')"><div class="style-name">L'Énergisant <span class="style-ref">— Klopp</span></div><div class="style-desc">Pressing intense, transitions ultra-rapides, gros volume de courses. 100% d'intensité du début à la fin.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'green')"><div class="style-name">Le Général <span class="style-ref">— Simeone</span></div><div class="style-desc">Bloc compact, rigueur défensive, contre-attaques éclair. Difficile à battre, redoutable en transition.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'green')"><div class="style-name">Le Pragmatique <span class="style-ref">— Ancelotti / Deschamps</span></div><div class="style-desc">Adaptabilité totale, gestion humaine forte. S'adapte aux joueurs, met l'humain au centre.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'green')"><div class="style-name">Le Percuteur <span class="style-ref">— Bielsa</span></div><div class="style-desc">Marquage individuel agressif, jeu très vertical. Intensité maximale, pressing haut permanent.</div></div>
       </div>
       <div class="form-group"><label>Système préférentiel *</label><input type="text" placeholder="Ex : 4-3-3, 3-5-2..."></div>
       <div class="form-group"><label>Ta plus grande réussite *</label><textarea rows="3" placeholder="Décris ta plus belle réussite en tant que coach..."></textarea></div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">MOBILITÉ & DISPONIBILITÉ</div>
+      <div class="section-title">MOBILITÉ & DISPONIBILITÉ</div>
       <div class="form-group">
         <label>Catégories souhaitées *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">Seniors</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Formation U16-U19</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Pré-formation U12-U15</div>
-          <div class="chip" onclick="toggleChip(this,'green')">École de foot</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Féminines</div>
+          <div class="chip" onclick="multi(this,'green')">Seniors</div>
+          <div class="chip" onclick="multi(this,'green')">Formation U16-U19</div>
+          <div class="chip" onclick="multi(this,'green')">Pré-formation U12-U15</div>
+          <div class="chip" onclick="multi(this,'green')">École de foot</div>
+          <div class="chip" onclick="multi(this,'green')">Féminines</div>
         </div>
       </div>
       <div class="form-group">
         <label>Zone de mobilité *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">Mon département</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Dép. limitrophes</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Toute l'IDF</div>
-          <div class="chip" onclick="toggleChip(this,'green')">France entière</div>
+          <div class="chip" onclick="solo(this,'green')">Mon département</div>
+          <div class="chip" onclick="solo(this,'green')">Dép. limitrophes</div>
+          <div class="chip" onclick="solo(this,'green')">Toute l'IDF</div>
+          <div class="chip" onclick="solo(this,'green')">France entière</div>
         </div>
       </div>
       <div class="form-group">
         <label>Statut souhaité *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'green')">Bénévole</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Salarié temps partiel</div>
-          <div class="chip" onclick="toggleChip(this,'green')">Salarié temps plein</div>
+          <div class="chip" onclick="solo(this,'green')">Bénévole</div>
+          <div class="chip" onclick="solo(this,'green')">Salarié temps partiel</div>
+          <div class="chip" onclick="solo(this,'green')">Salarié temps plein</div>
         </div>
       </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">BOOST ⚡ OPTIONNEL</div>
-      <div class="offre-card-select" onclick="toggleOffre(this)" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.06)">
-        <div class="offre-name" style="color:#f59e0b">⚡ Boost Éclair — Offre de lancement</div>
-        <div class="offre-desc">Profil en haut de la liste · Badge ⚡ actif · Mini-CV dynamique</div>
-        <div class="offre-price" style="color:#f59e0b"><span style="text-decoration:line-through;color:rgba(255,255,255,0.3);font-size:12px">20€</span> → 10€ / 2 semaines</div>
+      <div class="section-title">BOOST OPTIONNEL</div>
+      <div class="offre-sel" onclick="this.classList.toggle('active')" style="border-color:rgba(245,158,11,0.3)">
+        <div class="offre-name" style="color:var(--amber)">Boost Éclair — Offre de lancement</div>
+        <div class="offre-desc">Badge ⚡ visible sur ton profil · Signal aux clubs que tu es en recherche active · Mini-CV dynamique</div>
+        <div class="offre-price" style="color:var(--amber)"><span style="text-decoration:line-through;color:var(--muted);font-size:12px">20€</span> → 10€ / 2 semaines</div>
       </div>
+      <div class="section-title">RGPD</div>
+      <div class="rgpd-row"><input type="checkbox" id="rc1"><label for="rc1">J'accepte que mes données soient traitées par Mercato Staff pour la mise en relation avec des clubs. Durée : 2 ans. Contact : mercato.staff@gmail.com</label></div>
+      <div class="rgpd-row" style="margin-top:8px"><input type="checkbox" id="rc2"><label for="rc2">Je certifie être majeur(e) (18 ans ou plus).</label></div>
+      <button class="btn-submit btn-green" onclick="submitForm('coach')">Rejoindre la base gratuitement</button>
     </div>
+  </div>
 
-    <div class="form-section">
-      <div class="form-section-title">RGPD</div>
-      <div class="rgpd-check"><input type="checkbox" id="rgpd-coach"><label for="rgpd-coach">J'accepte que mes données soient traitées par Mercato Staff dans le cadre de la mise en relation avec des clubs. Durée : 2 ans. Contact : mercato.staff@gmail.com</label></div>
-      <div class="rgpd-check" style="margin-top:8px"><input type="checkbox" id="major-coach"><label for="major-coach">Je certifie être majeur(e) (18 ans ou plus).</label></div>
-    </div>
-
-    <button class="btn-submit btn-submit-green" onclick="submitForm('coach')">Rejoindre la base gratuitement</button>
+  <!-- Page À propos (coach) -->
+  <div id="cp-about" class="page">
+    <div id="about-content-coach"></div>
   </div>
 </div>
 
-<!-- PAGE INSCRIPTION CLUB -->
-<div id="page-club-signup" class="page">
-  <div class="form-page">
-    <div class="form-header">
-      <h2>Inscription <span style="color:var(--cyan)">Club</span></h2>
-      <p>Accédez à la base · Île-de-France · Offre de lancement</p>
-    </div>
+<!-- ═══════════════════════════════════ ESPACE CLUB ═══ -->
+<div id="screen-club" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">Mercato <span>Staff</span> <span style="font-size:11px;color:var(--cyan);font-weight:600;margin-left:6px">Club</span></div>
+    <div class="topbar-switch" onclick="backToWelcome()">Changer</div>
+  </div>
 
-    <div class="form-section">
-      <div class="form-section-title">VOTRE CLUB</div>
+  <!-- Nav club -->
+  <div class="bottom-nav" id="nav-club">
+    <div class="nav-item active" onclick="goClub('base')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <div class="nav-label">BASE</div>
+    </div>
+    <div class="nav-item" onclick="goClub('contacts')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <div class="nav-label">CONTACTS</div>
+    </div>
+    <div class="nav-item" onclick="goClub('abo')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      <div class="nav-label">ABONNEMENT</div>
+    </div>
+    <div class="nav-item" onclick="goClub('about')">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <div class="nav-label">À PROPOS</div>
+    </div>
+  </div>
+
+  <!-- Page Base Coachs -->
+  <div id="clp-base" class="page active">
+    <div class="page-title"><h2>Base de <span style="color:var(--cyan)">coachs</span></h2><p>Île-de-France · Triés par compatibilité</p></div>
+    <div class="criteres-bar">
+      <div style="font-size:9px;font-weight:700;color:var(--cyan);letter-spacing:.1em;margin-bottom:8px">VOS CRITÈRES ACTIFS</div>
+      <div>
+        <span class="critere-tag">Entraîneur Principal</span>
+        <span class="critere-tag">Architecte</span>
+        <span class="critere-tag">Seniors</span>
+        <span class="critere-tag">93</span>
+        <span class="critere-tag">Salarié temps plein</span>
+        <span class="critere-tag">Disponible</span>
+      </div>
+      <div style="margin-top:8px;display:flex;justify-content:space-between">
+        <span style="font-size:10px;color:var(--muted)">Triés par compatibilité</span>
+        <span style="font-size:10px;font-weight:700;color:var(--cyan)" id="matchCount">7 profils</span>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Rechercher un coach..." oninput="filterList(this.value)">
+    </div>
+    <div class="filter-row">
+      <div class="fchip active" onclick="setFilter('tous',this)">Tous</div>
+      <div class="fchip" onclick="setFilter('boost',this)">Boost actif</div>
+      <div class="fchip" onclick="setFilter('dispo',this)">Disponible</div>
+      <div class="fchip" onclick="setFilter('entraineur',this)">Entraîneur</div>
+      <div class="fchip" onclick="setFilter('regional',this)">Régional+</div>
+      <div class="fchip" onclick="setFilter('93',this)">93</div>
+      <div class="fchip" onclick="setFilter('94',this)">94</div>
+    </div>
+    <div class="coaches-list" id="coachesList"></div>
+  </div>
+
+  <!-- Page Contacts débloqués -->
+  <div id="clp-contacts" class="page">
+    <div class="page-title"><h2>Contacts <span style="color:var(--cyan)">débloqués</span></h2><p>2 contacts débloqués ce mois</p></div>
+    <div style="height:12px"></div>
+    <div class="contact-card">
+      <div class="contact-av" style="background:linear-gradient(135deg,#f59e0b,#e67e22)">TM</div>
+      <div class="contact-info">
+        <div class="contact-name">Thomas M.</div>
+        <div class="contact-detail">UEFA B · Architecte · 93</div>
+        <div style="margin-top:6px">
+          <div style="font-size:12px;color:var(--text)">06 12 34 56 78</div>
+          <div style="font-size:12px;color:var(--cyan)">thomas.m@email.com</div>
+        </div>
+      </div>
+      <button class="contact-btn">Appeler</button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-av" style="background:linear-gradient(135deg,#00d4ff,#0066cc)">KD</div>
+      <div class="contact-info">
+        <div class="contact-name">Karim D.</div>
+        <div class="contact-detail">BEPF · Energisant · 75</div>
+        <div style="margin-top:6px">
+          <div style="font-size:12px;color:var(--text)">07 98 76 54 32</div>
+          <div style="font-size:12px;color:var(--cyan)">karim.d@email.com</div>
+        </div>
+      </div>
+      <button class="contact-btn">Appeler</button>
+    </div>
+    <div style="margin:20px;background:rgba(0,212,255,0.06);border:0.5px solid rgba(0,212,255,0.2);border-radius:10px;padding:14px">
+      <div style="font-size:12px;color:var(--muted);line-height:1.6;text-align:center">Mercato Staff est un service de mise en relation.<br>La décision finale appartient au club et au coach.</div>
+    </div>
+  </div>
+
+  <!-- Page Abonnement -->
+  <div id="clp-abo" class="page">
+    <div class="page-title"><h2>Mon <span style="color:var(--cyan)">abonnement</span></h2><p>Offre de lancement active</p></div>
+    <div style="height:12px"></div>
+    <div class="abo-card">
+      <div class="abo-title">Engagement — 1 an</div>
+      <div class="abo-price">GRATUIT <span style="font-size:14px;font-weight:400;color:var(--muted)">pendant le lancement</span></div>
+      <div class="abo-desc">Accès complet à la base · 2 contacts offerts dès le 1er mois · Contact suivant : 5€</div>
+    </div>
+    <div class="abo-stat"><span class="abo-stat-label">Contacts offerts restants</span><span class="abo-stat-val" style="color:var(--green)">0 / 2 utilisés</span></div>
+    <div class="abo-stat"><span class="abo-stat-label">Contacts débloqués ce mois</span><span class="abo-stat-val">2</span></div>
+    <div class="abo-stat"><span class="abo-stat-label">Prochain déblocage</span><span class="abo-stat-val" style="color:var(--cyan)">5 €</span></div>
+    <div class="abo-stat"><span class="abo-stat-label">Renouvellement</span><span class="abo-stat-val">Mars 2027</span></div>
+    <div style="padding:0 20px;margin-top:8px">
+      <button class="btn-submit btn-blue" onclick="goClub('signup')">Modifier mes critères de recherche</button>
+    </div>
+  </div>
+
+  <!-- Page Inscription Club -->
+  <div id="clp-signup" class="page">
+    <div class="padded">
+      <div style="margin-bottom:22px">
+        <h2 style="font-size:22px;font-weight:800;margin-bottom:5px">Inscription <span style="color:var(--cyan)">Club</span></h2>
+        <p style="font-size:13px;color:var(--muted)">Accédez à la base · Île-de-France · Offre de lancement</p>
+      </div>
+      <div class="section-title">VOTRE CLUB</div>
       <div class="form-group"><label>Nom du club *</label><input type="text" placeholder="Ex : AS Bondy"></div>
-      <div class="form-group">
-        <label>Département *</label>
+      <div class="form-group"><label>Département *</label>
         <select><option value="">Choisir...</option><option>75 — Paris</option><option>77 — Seine-et-Marne</option><option>78 — Yvelines</option><option>91 — Essonne</option><option>92 — Hauts-de-Seine</option><option>93 — Seine-Saint-Denis</option><option>94 — Val-de-Marne</option><option>95 — Val-d'Oise</option></select>
       </div>
-      <div class="form-group">
-        <label>Niveau de l'équipe *</label>
+      <div class="form-group"><label>Niveau *</label>
         <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">National 3</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Régional 1</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Régional 2</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Régional 3</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">District</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Jeunes</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Futsal</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Féminin</div>
+          <div class="chip" onclick="solo(this,'cyan')">National 3</div><div class="chip" onclick="solo(this,'cyan')">Régional 1</div><div class="chip" onclick="solo(this,'cyan')">Régional 2</div><div class="chip" onclick="solo(this,'cyan')">Régional 3</div><div class="chip" onclick="solo(this,'cyan')">District</div><div class="chip" onclick="solo(this,'cyan')">Jeunes</div><div class="chip" onclick="solo(this,'cyan')">Futsal</div><div class="chip" onclick="solo(this,'cyan')">Féminin</div>
         </div>
       </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">PROFIL DU COACH RECHERCHÉ</div>
-      <div class="form-group">
-        <label>Poste(s) recherché(s) *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Entraîneur Principal</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Adjoint</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Prépa Physique</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Analyste Vidéo</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Entraîneur Gardiens</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">RTJ</div>
-        </div>
+      <div class="section-title">PROFIL DU COACH RECHERCHÉ</div>
+      <div class="form-group"><label>Poste *</label>
+        <div class="chips"><div class="chip" onclick="multi(this,'cyan')">Entraîneur Principal</div><div class="chip" onclick="multi(this,'cyan')">Adjoint</div><div class="chip" onclick="multi(this,'cyan')">Prépa Physique</div><div class="chip" onclick="multi(this,'cyan')">Analyste Vidéo</div><div class="chip" onclick="multi(this,'cyan')">Entraîneur Gardiens</div><div class="chip" onclick="multi(this,'cyan')">RTJ</div></div>
       </div>
-      <div class="form-group">
-        <label>Diplôme minimum *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Aucun</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">CFF1</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">CFF2</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">BMF</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">BEPF</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">UEFA B</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">UEFA A</div>
-        </div>
+      <div class="form-group"><label>Diplôme minimum *</label>
+        <div class="chips"><div class="chip" onclick="solo(this,'cyan')">Aucun</div><div class="chip" onclick="solo(this,'cyan')">CFF1</div><div class="chip" onclick="solo(this,'cyan')">CFF2</div><div class="chip" onclick="solo(this,'cyan')">BMF</div><div class="chip" onclick="solo(this,'cyan')">BEPF</div><div class="chip" onclick="solo(this,'cyan')">UEFA B</div><div class="chip" onclick="solo(this,'cyan')">UEFA A</div></div>
       </div>
       <div class="form-group">
         <label>Style de jeu souhaité *</label>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="Architecte">
-            <div class="style-name">🏗️ L'Architecte <span style="opacity:.5;font-weight:400">— Guardiola</span></div>
-            <div class="style-desc">Possession, construction courte, maîtrise du rythme. Le jeu est organisé à la perfection, chaque joueur a un rôle précis.</div>
-          </div>
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="Energisant">
-            <div class="style-name">⚡ L'Énergisant <span style="opacity:.5;font-weight:400">— Klopp</span></div>
-            <div class="style-desc">Pressing intense, transitions ultra-rapides, gros volume de courses. L'équipe joue à 100% d'intensité du début à la fin.</div>
-          </div>
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="General">
-            <div class="style-name">🛡️ Le Général <span style="opacity:.5;font-weight:400">— Simeone</span></div>
-            <div class="style-desc">Bloc compact, rigueur défensive, contre-attaques éclair. Discipliné, difficile à battre, redoutable en transition.</div>
-          </div>
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="Pragmatique">
-            <div class="style-name">🧠 Le Pragmatique <span style="opacity:.5;font-weight:400">— Ancelotti / Deschamps</span></div>
-            <div class="style-desc">Adaptabilité totale, gestion humaine forte, équilibre. S'adapte aux joueurs disponibles, met l'humain au centre.</div>
-          </div>
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="Percuteur">
-            <div class="style-name">🔥 Le Percuteur <span style="opacity:.5;font-weight:400">— Bielsa</span></div>
-            <div class="style-desc">Marquage individuel agressif, jeu très vertical vers l'avant. Intensité maximale, pressing haut permanent, spectaculaire.</div>
-          </div>
-          <div class="style-card style-card-cyan" onclick="selectStyleCyan(this)" data-style="Indifferent">
-            <div class="style-name">🤝 Pas de préférence</div>
-            <div class="style-desc">Le style de jeu n'est pas un critère prioritaire dans votre recherche.</div>
-          </div>
-        </div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">L'Architecte <span class="style-ref">— Guardiola</span></div><div class="style-desc">Possession, construction courte, maîtrise du rythme.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">L'Énergisant <span class="style-ref">— Klopp</span></div><div class="style-desc">Pressing intense, transitions ultra-rapides, gros volume de courses.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">Le Général <span class="style-ref">— Simeone</span></div><div class="style-desc">Bloc compact, rigueur défensive, contre-attaques éclair.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">Le Pragmatique <span class="style-ref">— Ancelotti / Deschamps</span></div><div class="style-desc">Adaptabilité totale, gestion humaine forte, équilibre.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">Le Percuteur <span class="style-ref">— Bielsa</span></div><div class="style-desc">Marquage individuel agressif, jeu très vertical vers l'avant.</div></div>
+        <div class="style-card" onclick="soloStyle(this,'cyan')"><div class="style-name">Pas de préférence</div><div class="style-desc">Le style n'est pas un critère prioritaire.</div></div>
       </div>
-      <div class="form-group">
-        <label>Catégorie *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Seniors</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Formation U16-U19</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Pré-formation U12-U15</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">École de foot</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Féminines</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Statut souhaité *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Bénévole</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Salarié temps partiel</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Salarié temps plein</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Indifférent</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Disponibilité souhaitée *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Immédiate</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Début de saison</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Mercato hivernal</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Flexible</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Zone de mobilité acceptée *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Mon département</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Dép. limitrophes</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Toute l'IDF</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Indifférent</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">VOTRE OFFRE *</div>
-      <div class="offre-card-select" onclick="selectOffre(this,'offre-liberte')">
-        <div class="offre-name">🔹 Liberté — sans engagement</div>
-        <div class="offre-desc">Accès complet à la base · Contact <span style="text-decoration:line-through;opacity:.5">30€</span> → 10€/profil</div>
+      <div class="form-group"><label>Catégorie *</label><div class="chips"><div class="chip" onclick="solo(this,'cyan')">Seniors</div><div class="chip" onclick="solo(this,'cyan')">Formation U16-U19</div><div class="chip" onclick="solo(this,'cyan')">Pré-formation U12-U15</div><div class="chip" onclick="solo(this,'cyan')">École de foot</div><div class="chip" onclick="solo(this,'cyan')">Féminines</div></div></div>
+      <div class="form-group"><label>Statut souhaité *</label><div class="chips"><div class="chip" onclick="solo(this,'cyan')">Bénévole</div><div class="chip" onclick="solo(this,'cyan')">Salarié temps partiel</div><div class="chip" onclick="solo(this,'cyan')">Salarié temps plein</div><div class="chip" onclick="solo(this,'cyan')">Indifférent</div></div></div>
+      <div class="form-group"><label>Disponibilité souhaitée *</label><div class="chips"><div class="chip" onclick="solo(this,'cyan')">Immédiate</div><div class="chip" onclick="solo(this,'cyan')">Début de saison</div><div class="chip" onclick="solo(this,'cyan')">Mercato hivernal</div><div class="chip" onclick="solo(this,'cyan')">Flexible</div></div></div>
+      <div class="form-group"><label>Zone de mobilité acceptée *</label><div class="chips"><div class="chip" onclick="solo(this,'cyan')">Mon département</div><div class="chip" onclick="solo(this,'cyan')">Dép. limitrophes</div><div class="chip" onclick="solo(this,'cyan')">Toute l'IDF</div><div class="chip" onclick="solo(this,'cyan')">Indifférent</div></div></div>
+      <div class="section-title">VOTRE OFFRE *</div>
+      <div class="offre-sel" onclick="selectOff(this)">
+        <div class="offre-name">Liberté — sans engagement</div>
+        <div class="offre-desc">Accès base · Contact <span style="text-decoration:line-through;opacity:.5">30€</span> → 10€/profil</div>
         <div class="offre-price"><span style="text-decoration:line-through;color:var(--muted);font-size:12px">50€/mois</span> → GRATUIT</div>
       </div>
-      <div class="offre-card-select" onclick="selectOffre(this,'offre-engagement')">
-        <div class="offre-name">🔹 Engagement — 1 an</div>
-        <div class="offre-desc">Accès complet · 2 contacts offerts dès le 1er mois · Contact suivant <span style="text-decoration:line-through;opacity:.5">15€</span> → 5€</div>
+      <div class="offre-sel" onclick="selectOff(this)">
+        <div class="offre-name">Engagement — 1 an</div>
+        <div class="offre-desc">Accès base · 2 contacts offerts · Contact suivant <span style="text-decoration:line-through;opacity:.5">15€</span> → 5€</div>
         <div class="offre-price"><span style="text-decoration:line-through;color:var(--muted);font-size:12px">50€/mois</span> → GRATUIT</div>
       </div>
-      <div class="offre-card-select" style="opacity:.6;border-style:dashed" onclick="alert('Cette offre sera disponible très prochainement !')">
-        <div class="offre-name" style="color:#f59e0b">🔹 Flash Éclair — Bientôt disponible 🔜</div>
-        <div class="offre-desc">5 profils ciblés · Livraison 48h · Contacts inclus</div>
-        <div class="offre-price" style="color:#f59e0b;text-decoration:line-through;opacity:.5">250€ unique</div>
+      <div class="offre-sel" style="opacity:.6;border-style:dashed" onclick="alert('Disponible bientot !')">
+        <div class="offre-name" style="color:var(--amber)">Flash Éclair — Bientôt disponible</div>
+        <div class="offre-desc">5 profils ciblés · 48h · Contacts inclus</div>
+        <div class="offre-price" style="color:var(--amber);text-decoration:line-through;opacity:.5">250€ unique</div>
       </div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">VOS COORDONNÉES</div>
+      <div class="section-title">VOS COORDONNÉES</div>
       <div class="form-group"><label>Nom et prénom *</label><input type="text" placeholder="Ex : Jean Dupont"></div>
-      <div class="form-group">
-        <label>Votre rôle *</label>
-        <div class="chips">
-          <div class="chip" onclick="toggleChip(this,'cyan')">Président</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Directeur sportif</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Secrétaire général</div>
-          <div class="chip" onclick="toggleChip(this,'cyan')">Autre</div>
-        </div>
-      </div>
+      <div class="form-group"><label>Rôle *</label><div class="chips"><div class="chip" onclick="solo(this,'cyan')">Président</div><div class="chip" onclick="solo(this,'cyan')">Directeur sportif</div><div class="chip" onclick="solo(this,'cyan')">Secrétaire général</div><div class="chip" onclick="solo(this,'cyan')">Autre</div></div></div>
       <div class="form-group"><label>Email *</label><input type="email" placeholder="contact@votreclub.fr"></div>
       <div class="form-group"><label>Téléphone *</label><input type="tel" placeholder="06 xx xx xx xx"></div>
+      <div class="section-title">RGPD</div>
+      <div class="rgpd-row"><input type="checkbox" id="rclub"><label for="rclub">J'accepte que mes données soient traitées par Mercato Staff. Durée : 2 ans. Contact : mercato.staff@gmail.com</label></div>
+      <button class="btn-submit btn-blue" onclick="submitForm('club')">Accéder à la base de coachs</button>
     </div>
+  </div>
 
-    <div class="form-section">
-      <div class="form-section-title">RGPD</div>
-      <div class="rgpd-check"><input type="checkbox" id="rgpd-club"><label for="rgpd-club">J'accepte que mes données soient traitées par Mercato Staff dans le cadre de la mise en relation avec des coachs. Durée : 2 ans. Contact : mercato.staff@gmail.com</label></div>
-    </div>
-
-    <button class="btn-submit btn-submit-cyan" onclick="submitForm('club')">Accéder à la base de coachs</button>
+  <!-- Page À propos (club) -->
+  <div id="clp-about" class="page">
+    <div id="about-content-club"></div>
   </div>
 </div>
 
-<!-- PAGE BASE COACHS -->
-<div id="page-base" class="page">
-  <div class="page-title">
-    <h2>Base de <span style="color:var(--cyan)">coachs</span></h2>
-    <p>Île-de-France · Profils qualifiés</p>
-  </div>
-
-  <!-- Filtres actifs du club -->
-  <div id="active-filters-bar" style="margin:0 20px 12px;background:rgba(0,212,255,0.06);border:0.5px solid rgba(0,212,255,0.2);border-radius:10px;padding:10px 12px;display:none">
-    <div style="font-size:9px;font-weight:700;color:var(--cyan);letter-spacing:.1em;margin-bottom:8px">VOS CRITÈRES ACTIFS</div>
-    <div id="active-filters-tags" style="display:flex;flex-wrap:wrap;gap:5px"></div>
-    <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between">
-      <span style="font-size:10px;color:var(--muted)">Triés par compatibilité</span>
-      <span style="font-size:10px;font-weight:700;color:var(--cyan)" id="match-count"></span>
-    </div>
-  </div>
-
-  <div class="search-bar">
-    <span class="search-icon">🔍</span>
-    <input type="text" placeholder="Rechercher un coach..." oninput="filterCoaches(this.value)">
-  </div>
-
-  <div class="filters">
-    <div class="filter-chip active" onclick="setFilter('tous',this)">Tous</div>
-    <div class="filter-chip" onclick="setFilter('boost',this)">⚡ Boost actif</div>
-    <div class="filter-chip" onclick="setFilter('dispo',this)">Disponible</div>
-    <div class="filter-chip" onclick="setFilter('entraineur',this)">Entraîneur</div>
-    <div class="filter-chip" onclick="setFilter('regional',this)">Régional+</div>
-    <div class="filter-chip" onclick="setFilter('93',this)">93</div>
-    <div class="filter-chip" onclick="setFilter('94',this)">94</div>
-  </div>
-
-  <div class="coaches-list" id="coaches-list"></div>
-</div>
-
-<!-- PAGE NOTIFS -->
-<div id="page-notifs" class="page">
-  <div class="page-title">
-    <h2>Notifications</h2>
-    <p>Activité sur ton profil</p>
-  </div>
-  <div class="notif-list">
-    <div class="notif-item unread">
-      <div class="notif-dot"></div>
-      <div><div class="notif-text">🏟️ <strong>AS Bondy</strong> a consulté ton profil</div><div class="notif-time">Il y a 5 min</div></div>
-    </div>
-    <div class="notif-item unread">
-      <div class="notif-dot"></div>
-      <div><div class="notif-text">🏟️ <strong>Red Star FC</strong> a consulté ton profil</div><div class="notif-time">Il y a 2h</div></div>
-    </div>
-    <div class="notif-item unread">
-      <div class="notif-dot"></div>
-      <div><div class="notif-text">⚡ Ton <strong>Boost Éclair</strong> est actif — profil en haut de la liste</div><div class="notif-time">Il y a 1 jour</div></div>
-    </div>
-    <div class="notif-item">
-      <div class="notif-dot read"></div>
-      <div><div class="notif-text">✅ Ton profil a bien été ajouté à la base Mercato Staff</div><div class="notif-time">Il y a 3 jours</div></div>
-    </div>
-    <div class="notif-item">
-      <div class="notif-dot read"></div>
-      <div><div class="notif-text">🏟️ <strong>CO Vincennes</strong> a consulté ton profil</div><div class="notif-time">Il y a 5 jours</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <div class="nav-item active" onclick="showTab('home')">
-    <div class="nav-icon">🏠</div>
-    <div class="nav-label">ACCUEIL</div>
-  </div>
-  <div class="nav-item" onclick="showTab('base')">
-    <div class="nav-icon">🔍</div>
-    <div class="nav-label">BASE</div>
-  </div>
-  <div class="nav-item" onclick="showTab('notifs')">
-    <div class="nav-icon">🔔</div>
-    <div class="nav-label">NOTIFS</div>
-  </div>
-</div>
-
-<!-- MODAL PROFIL COACH -->
-<div class="modal-overlay" id="modal-coach" onclick="closeModal()">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <div class="profile-card" style="margin:0;margin-bottom:16px">
-      <div class="profile-header">
-        <div class="avatar">TM</div>
-        <div>
-          <div class="profile-name">Thomas M.</div>
-          <div class="profile-sub">Entraîneur Principal · Île-de-France</div>
-          <div class="badge-eclair">⚡ Boost actif — En recherche active</div>
-        </div>
-      </div>
-      <div class="profile-body">
-        <div class="profile-row"><span class="profile-key">Diplôme</span><span class="profile-val">UEFA B</span></div>
-        <div class="profile-row"><span class="profile-key">Style</span><span class="profile-val">L'Architecte (Guardiola)</span></div>
-        <div class="profile-row"><span class="profile-key">Système</span><span class="profile-val">4-3-3 / 4-2-3-1</span></div>
-        <div class="profile-row"><span class="profile-key">Niveau max</span><span class="profile-val">Régional 1</span></div>
-        <div class="profile-row"><span class="profile-key">Catégorie</span><span class="profile-val">Seniors · Formation</span></div>
-        <div class="profile-row"><span class="profile-key">Statut</span><span class="profile-val">Salarié temps plein</span></div>
-        <div class="profile-row"><span class="profile-key">Mobilité</span><span class="profile-val">Toute l'IDF</span></div>
-        <div class="profile-row"><span class="profile-key">Dispo</span><span class="profile-val" style="color:var(--green)">🟢 Immédiate</span></div>
-        <div class="contact-blocked">
-          <span>🔒 Contact bloqué — Tél. & email masqués</span>
-        </div>
-        <button class="btn-unlock">Débloquer le contact — 10 €</button>
-      </div>
-    </div>
-    <button class="btn-submit btn-submit-cyan" onclick="closeModal()">Fermer</button>
-  </div>
+<!-- MODAL COACH -->
+<div class="modal-overlay" id="modalCoach" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()" id="modalCoachContent"><div class="modal-handle"></div></div>
 </div>
 
 <!-- MODAL SUCCESS -->
-<div class="modal-overlay" id="modal-success" onclick="closeSuccess()">
+<div class="modal-overlay" id="modalSuccess" onclick="closeSuccess()">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <div class="success-screen">
-      <div class="success-icon" id="success-icon">✅</div>
-      <div class="success-title" id="success-title">Inscription envoyée !</div>
-      <div class="success-text" id="success-text">Ton profil a bien été reçu. Tu recevras un mail de confirmation sous peu.</div>
-      <button class="btn-submit btn-submit-green" style="margin-top:24px" onclick="closeSuccess()">Super, merci !</button>
+      <div class="success-icon" id="sIcon">✅</div>
+      <div class="success-title" id="sTitle">Envoyé !</div>
+      <div class="success-text" id="sText">Merci pour votre inscription.</div>
+      <button class="btn-submit btn-green" style="margin-top:24px" onclick="closeSuccess()">Super, merci !</button>
     </div>
   </div>
 </div>
 
 <script>
-function selectStyle(el, color) {
-  el.closest('.form-group').querySelectorAll('.style-card').forEach(c => c.classList.remove('selected-green','selected-cyan'));
-  el.classList.add('selected-'+color);
-}
-function selectStyleCyan(el) { selectStyle(el, 'cyan'); }
-
-// Stats animées
-let c = 0, cl = 0;
-const si = setInterval(() => {
-  if(c < 47) { c++; document.getElementById('stat-coaches').textContent = c; }
-  if(cl < 12) { cl++; document.getElementById('stat-clubs').textContent = cl; }
-  if(c >= 47 && cl >= 12) clearInterval(si);
-}, 40);
-
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  window.scrollTo(0,0);
-}
-
-function showTab(tab) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if(tab === 'home') {
-    document.getElementById('page-home').classList.add('active');
-    document.querySelectorAll('.nav-item')[0].classList.add('active');
-  } else if(tab === 'base') {
-    document.getElementById('page-base').classList.add('active');
-    document.querySelectorAll('.nav-item')[1].classList.add('active');
-  } else if(tab === 'notifs') {
-    document.getElementById('page-notifs').classList.add('active');
-    document.querySelectorAll('.nav-item')[2].classList.add('active');
-  }
-  window.scrollTo(0,0);
-}
-
-// Stats animées
-let c = 0, cl = 0;
-const si = setInterval(() => {
-  if(c < 47) { c++; document.getElementById('stat-coaches').textContent = c; }
-  if(cl < 12) { cl++; document.getElementById('stat-clubs').textContent = cl; }
-  if(c >= 47 && cl >= 12) clearInterval(si);
-}, 40);
-
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  window.scrollTo(0,0);
-}
-
-function showTab(tab) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if(tab==='home'){document.getElementById('page-home').classList.add('active');document.querySelectorAll('.nav-item')[0].classList.add('active');}
-  else if(tab==='base'){document.getElementById('page-base').classList.add('active');document.querySelectorAll('.nav-item')[1].classList.add('active');renderCoaches();}
-  else if(tab==='notifs'){document.getElementById('page-notifs').classList.add('active');document.querySelectorAll('.nav-item')[2].classList.add('active');}
-  window.scrollTo(0,0);
-}
-
-// Base coachs simulation
-const COACHES = [
-  { id:1, initiales:'TM', nom:'Thomas M.', boost:true, dispo:'Disponible', diplome:'UEFA B', style:'Architecte', dept:'93', poste:'Entraîneur Principal', niveau:'Régional 1', categorie:'Seniors', statut:'Salarié temps plein', mobilite:"Toute l'IDF", couleur:'linear-gradient(135deg,#f59e0b,#e67e22)' },
-  { id:2, initiales:'KD', nom:'Karim D.', boost:false, dispo:'Disponible', diplome:'BEPF', style:'Energisant', dept:'75', poste:'Entraîneur Principal', niveau:'Régional 2', categorie:'Seniors', statut:'Salarié temps partiel', mobilite:"Toute l'IDF", couleur:'linear-gradient(135deg,#00d4ff,#0066cc)' },
-  { id:3, initiales:'SB', nom:'Sébastien B.', boost:false, dispo:"À l'écoute", diplome:'CFF2', style:'General', dept:'94', poste:'Adjoint', niveau:'District', categorie:'Seniors', statut:'Bénévole', mobilite:'Départements limitrophes', couleur:'linear-gradient(135deg,#00e676,#00897b)' },
-  { id:4, initiales:'ML', nom:'Marc L.', boost:false, dispo:'Disponible', diplome:'BMF', style:'Pragmatique', dept:'92', poste:'Prépa Physique', niveau:'Régional 1', categorie:'Seniors', statut:'Salarié temps plein', mobilite:"Toute l'IDF", couleur:'linear-gradient(135deg,#a855f7,#6366f1)' },
-  { id:5, initiales:'JR', nom:'Julien R.', boost:false, dispo:'Indisponible', diplome:'UEFA A', style:'Percuteur', dept:'77', poste:'Entraîneur Principal', niveau:'National', categorie:'Formation U16-U19', statut:'Salarié temps plein', mobilite:'France entière', couleur:'linear-gradient(135deg,#e74c3c,#c0392b)' },
-  { id:6, initiales:'AB', nom:'Alexis B.', boost:false, dispo:'Disponible', diplome:'CFF1', style:'Architecte', dept:'93', poste:'Entraîneur Principal', niveau:'District', categorie:'École de foot', statut:'Bénévole', mobilite:'Mon département', couleur:'linear-gradient(135deg,#00d4ff,#00897b)' },
-  { id:7, initiales:'RN', nom:'Rachid N.', boost:false, dispo:'Disponible', diplome:'UEFA B', style:'Energisant', dept:'93', poste:'Entraîneur Principal', niveau:'Régional 2', categorie:'Seniors', statut:'Salarié temps partiel', mobilite:"Toute l'IDF", couleur:'linear-gradient(135deg,#f59e0b,#00897b)' },
+var COACHES=[
+  {id:1,ini:'TM',nom:'Thomas M.',boost:true,dispo:'Disponible',diplome:'UEFA B',style:'Architecte',dept:'93',poste:'Entraîneur Principal',niveau:'Régional 1',categorie:'Seniors',statut:'Salarié temps plein',mobilite:"Toute l'IDF",bg:'linear-gradient(135deg,#f59e0b,#e67e22)'},
+  {id:2,ini:'KD',nom:'Karim D.',boost:false,dispo:'Disponible',diplome:'BEPF',style:'Energisant',dept:'75',poste:'Entraîneur Principal',niveau:'Régional 2',categorie:'Seniors',statut:'Salarié temps partiel',mobilite:"Toute l'IDF",bg:'linear-gradient(135deg,#00d4ff,#0066cc)'},
+  {id:3,ini:'SB',nom:'Sébastien B.',boost:false,dispo:"A l'écoute",diplome:'CFF2',style:'Général',dept:'94',poste:'Adjoint',niveau:'District',categorie:'Seniors',statut:'Bénévole',mobilite:'Départements limitrophes',bg:'linear-gradient(135deg,#00e676,#00897b)'},
+  {id:4,ini:'ML',nom:'Marc L.',boost:false,dispo:'Disponible',diplome:'BMF',style:'Pragmatique',dept:'92',poste:'Prépa Physique',niveau:'Régional 1',categorie:'Seniors',statut:'Salarié temps plein',mobilite:"Toute l'IDF",bg:'linear-gradient(135deg,#a855f7,#6366f1)'},
+  {id:5,ini:'JR',nom:'Julien R.',boost:false,dispo:'Indisponible',diplome:'UEFA A',style:'Percuteur',dept:'77',poste:'Entraîneur Principal',niveau:'National',categorie:'Formation U16-U19',statut:'Salarié temps plein',mobilite:'France entière',bg:'linear-gradient(135deg,#e74c3c,#c0392b)'},
+  {id:6,ini:'AB',nom:'Alexis B.',boost:false,dispo:'Disponible',diplome:'CFF1',style:'Architecte',dept:'93',poste:'Entraîneur Principal',niveau:'District',categorie:'École de foot',statut:'Bénévole',mobilite:'Mon département',bg:'linear-gradient(135deg,#00d4ff,#00897b)'},
+  {id:7,ini:'RN',nom:'Rachid N.',boost:false,dispo:'Disponible',diplome:'UEFA B',style:'Energisant',dept:'93',poste:'Entraîneur Principal',niveau:'Régional 2',categorie:'Seniors',statut:'Salarié temps partiel',mobilite:"Toute l'IDF",bg:'linear-gradient(135deg,#f59e0b,#00897b)'}
 ];
+var CRITERES={poste:'Entraîneur Principal',style:'Architecte',dispo:'Disponible',dept:'93',statut:'Salarié temps plein',categorie:'Seniors'};
+var curFilter='tous',curSearch='';
 
-const clubCriteres = { poste:'Entraîneur Principal', style:'Architecte', dispo:'Disponible', dept:'93', statut:'Salarié temps plein', categorie:'Seniors' };
-let activeFilter = 'tous', searchQuery = '';
+function compat(c){
+  var s=0;
+  if(c.poste===CRITERES.poste)s++;
+  if(c.style===CRITERES.style)s++;
+  if(c.dispo==='Disponible'||c.dispo==="A l'écoute")s++;
+  if(c.dept===CRITERES.dept||c.mobilite==="Toute l'IDF"||c.mobilite==='France entière')s++;
+  if(c.statut===CRITERES.statut)s++;
+  if(c.categorie===CRITERES.categorie)s++;
+  return Math.round(s/6*100);
+}
+function cc(p){return p>=80?'#00e676':p>=50?'#f59e0b':'#e74c3c';}
+function dc(d){return d==='Disponible'?'#00e676':d==="A l'écoute"?'#f59e0b':'#e74c3c';}
 
-function calcCompatibilite(coach) {
-  let score = 0;
-  if(coach.poste === clubCriteres.poste) score++;
-  if(coach.style === clubCriteres.style) score++;
-  if(coach.dispo === 'Disponible' || coach.dispo === "À l'écoute") score++;
-  if(coach.dept === clubCriteres.dept || coach.mobilite === "Toute l'IDF" || coach.mobilite === 'France entière') score++;
-  if(coach.statut === clubCriteres.statut) score++;
-  if(coach.categorie === clubCriteres.categorie) score++;
-  return Math.round((score/6)*100);
+function mRow(label,val,match){
+  var col=match?'#00e676':'#e74c3c';
+  var ic=match?'✓':'✗';
+  return '<div class="profile-row" style="background:'+(match?'rgba(0,230,118,0.04)':'rgba(231,76,60,0.04)')+';border-color:'+(match?'rgba(0,230,118,0.15)':'rgba(231,76,60,0.15)')+'">'+
+    '<span class="pk" style="color:'+col+'">'+ic+' '+label+'</span>'+
+    '<span class="pv" style="color:'+col+'">'+val+'</span></div>';
 }
 
-function getCompatColor(p) { return p>=80?'#00e676':p>=50?'#f59e0b':'#e74c3c'; }
-function getDispoColor(d) { return d==='Disponible'?'#00e676':d==="À l'écoute"?'#f59e0b':'#e74c3c'; }
-
-function renderCoaches() {
-  let list = [...COACHES];
-  if(searchQuery) list = list.filter(c=>c.nom.toLowerCase().includes(searchQuery.toLowerCase())||c.dept.includes(searchQuery));
-  if(activeFilter==='boost') list=list.filter(c=>c.boost);
-  else if(activeFilter==='dispo') list=list.filter(c=>c.dispo==='Disponible');
-  else if(activeFilter==='entraineur') list=list.filter(c=>c.poste==='Entraîneur Principal');
-  else if(activeFilter==='regional') list=list.filter(c=>c.niveau.includes('Régional')||c.niveau==='National');
-  else if(activeFilter==='93') list=list.filter(c=>c.dept==='93');
-  else if(activeFilter==='94') list=list.filter(c=>c.dept==='94');
-  list = list.map(c=>({...c,score:calcCompatibilite(c)})).sort((a,b)=>{
-    if(a.boost&&!b.boost) return -1;
-    if(!a.boost&&b.boost) return 1;
-    return b.score-a.score;
-  });
-  const container = document.getElementById('coaches-list');
-  if(!container) return;
-  container.innerHTML = '';
-  if(!list.length){container.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Aucun coach trouvé</div>';return;}
-  list.forEach(coach=>{
-    const pct=coach.score, color=getCompatColor(pct), dc=getDispoColor(coach.dispo);
-    const card=document.createElement('div');
+function renderCoaches(){
+  var list=COACHES.slice();
+  if(curSearch)list=list.filter(function(c){return c.nom.toLowerCase().indexOf(curSearch.toLowerCase())>=0||c.dept.indexOf(curSearch)>=0;});
+  if(curFilter==='boost')list=list.filter(function(c){return c.boost;});
+  else if(curFilter==='dispo')list=list.filter(function(c){return c.dispo==='Disponible';});
+  else if(curFilter==='entraineur')list=list.filter(function(c){return c.poste==='Entraîneur Principal';});
+  else if(curFilter==='regional')list=list.filter(function(c){return c.niveau.indexOf('Régional')>=0||c.niveau==='National';});
+  else if(curFilter==='93')list=list.filter(function(c){return c.dept==='93';});
+  else if(curFilter==='94')list=list.filter(function(c){return c.dept==='94';});
+  list=list.map(function(c){return Object.assign({},c,{score:compat(c)});});
+  list.sort(function(a,b){if(a.boost&&!b.boost)return -1;if(!a.boost&&b.boost)return 1;return b.score-a.score;});
+  var el=document.getElementById('coachesList');
+  if(!el)return;
+  el.innerHTML='';
+  if(!list.length){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Aucun coach trouvé</div>';return;}
+  list.forEach(function(coach){
+    var pct=coach.score,col=cc(pct),d=dc(coach.dispo);
+    var card=document.createElement('div');
     card.className='coach-card'+(coach.boost?' boosted':'');
-    card.onclick=()=>openCoachModalData(coach);
-    card.innerHTML=`
-      <div class="coach-avatar" style="background:${coach.couleur}">${coach.initiales}</div>
-      <div class="coach-info">
-        <div class="coach-name">${coach.nom} ${coach.boost?'<span style="background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:4px;padding:1px 5px;font-size:9px;color:#f59e0b;font-weight:700">⚡ BOOST</span>':''}</div>
-        <div class="coach-details"><span class="dispo-dot" style="background:${dc}"></span>${coach.dispo} · ${coach.diplome} · ${coach.dept}</div>
-        <div style="margin-top:5px;display:flex;align-items:center;gap:6px">
-          <div style="flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden">
-            <div style="height:100%;width:${pct}%;background:${color};border-radius:2px"></div>
-          </div>
-          <span style="font-size:10px;font-weight:800;color:${color};min-width:32px">${pct}%</span>
-        </div>
-        <div style="font-size:9px;color:var(--muted)">compatibilité</div>
-      </div>
-      <div class="coach-right">
-        <div style="font-size:10px;color:var(--muted)">${coach.poste.replace('Entraîneur ','Entr. ')}</div>
-        <div style="font-size:10px;color:var(--muted)">${coach.niveau}</div>
-      </div>`;
-    container.appendChild(card);
+    card.innerHTML='<div class="coach-av" style="background:'+coach.bg+'">'+coach.ini+'</div>'+
+      '<div class="coach-info">'+
+        '<div class="coach-name">'+coach.nom+(coach.boost?' <span class="boost-badge">Boost actif</span>':'')+'</div>'+
+        '<div class="coach-details"><span class="dispo-dot" style="background:'+d+'"></span>'+coach.dispo+' · '+coach.diplome+' · '+coach.dept+'</div>'+
+        '<div class="compat-wrap"><div class="compat-bar"><div class="compat-fill" style="width:'+pct+'%;background:'+col+'"></div></div>'+
+        '<span class="compat-pct" style="color:'+col+'">'+pct+'%</span></div>'+
+        '<div class="compat-label">compatibilité</div>'+
+      '</div>'+
+      '<div class="coach-right"><div>'+coach.poste.replace('Entraîneur ','Entr. ')+'</div><div>'+coach.niveau+'</div></div>';
+    card.onclick=function(){openCoachModal(coach);};
+    el.appendChild(card);
   });
-  const mc=document.getElementById('match-count');
-  if(mc) mc.textContent=list.length+' profil'+(list.length>1?'s':'');
-  const bar=document.getElementById('active-filters-bar');
-  if(bar){bar.style.display='block';const tags=document.getElementById('active-filters-tags');tags.innerHTML='';Object.values(clubCriteres).forEach(v=>{if(v){const t=document.createElement('div');t.style.cssText='background:rgba(0,212,255,0.12);border:0.5px solid rgba(0,212,255,0.3);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:600;color:var(--cyan)';t.textContent=v;tags.appendChild(t);}});}
+  var mc=document.getElementById('matchCount');
+  if(mc)mc.textContent=list.length+' profil'+(list.length>1?'s':'');
 }
 
-function openCoachModalData(coach){
-  const pct=calcCompatibilite(coach),color=getCompatColor(pct);
-  const modal=document.getElementById('modal-coach');
-  modal.querySelector('.modal').innerHTML=`
-    <div class="modal-handle"></div>
-    <div class="profile-card" style="margin:0;margin-bottom:16px">
-      <div class="profile-header">
-        <div class="avatar" style="background:${coach.couleur}">${coach.initiales}</div>
-        <div style="flex:1">
-          <div class="profile-name">${coach.nom} ${coach.boost?'<span style="background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.4);border-radius:4px;padding:1px 6px;font-size:9px;color:#f59e0b">⚡ BOOST</span>':''}</div>
-          <div class="profile-sub">${coach.poste} · Île-de-France</div>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
-            <div style="flex:1;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden">
-              <div style="height:100%;width:${pct}%;background:${color};border-radius:4px"></div>
-            </div>
-            <span style="font-size:16px;font-weight:900;color:${color}">${pct}%</span>
-          </div>
-          <div style="font-size:10px;color:var(--muted)">Compatibilité avec vos critères</div>
-        </div>
-      </div>
-      <div class="profile-body">
-        <div class="profile-row"><span class="profile-key">Diplôme</span><span class="profile-val">${coach.diplome}</span></div>
-        <div class="profile-row"><span class="profile-key">Style</span><span class="profile-val">${coach.style}</span></div>
-        <div class="profile-row"><span class="profile-key">Niveau max</span><span class="profile-val">${coach.niveau}</span></div>
-        <div class="profile-row"><span class="profile-key">Catégorie</span><span class="profile-val">${coach.categorie}</span></div>
-        <div class="profile-row"><span class="profile-key">Statut</span><span class="profile-val">${coach.statut}</span></div>
-        <div class="profile-row"><span class="profile-key">Mobilité</span><span class="profile-val">${coach.mobilite}</span></div>
-        <div class="profile-row"><span class="profile-key">Dispo</span><span class="profile-val" style="color:${getDispoColor(coach.dispo)}">${coach.dispo}</span></div>
-        <div class="contact-blocked"><span>🔒 Contact bloqué — Tél. & email masqués</span></div>
-        <button class="btn-unlock">Débloquer le contact — 10 €</button>
-      </div>
-    </div>
-    <button class="btn-submit btn-submit-cyan" onclick="closeModal()">Fermer</button>`;
-  modal.classList.add('open');
+function openCoachModal(coach){
+  var pct=compat(coach),col=cc(pct);
+  var mP=coach.poste===CRITERES.poste;
+  var mS=coach.style===CRITERES.style;
+  var mD=coach.dispo==='Disponible'||coach.dispo==="A l'écoute";
+  var mDept=coach.dept===CRITERES.dept||coach.mobilite==="Toute l'IDF"||coach.mobilite==='France entière';
+  var mSt=coach.statut===CRITERES.statut;
+  var mC=coach.categorie===CRITERES.categorie;
+  document.getElementById('modalCoachContent').innerHTML=
+    '<div class="modal-handle"></div>'+
+    '<div style="background:var(--dark2);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px">'+
+      '<div style="background:linear-gradient(135deg,rgba(0,137,123,0.2),rgba(0,100,180,0.15));padding:18px;border-bottom:0.5px solid var(--border);display:flex;align-items:flex-start;gap:12px">'+
+        '<div class="coach-av" style="background:'+coach.bg+';width:52px;height:52px;font-size:17px">'+coach.ini+'</div>'+
+        '<div style="flex:1">'+
+          '<div style="font-size:17px;font-weight:800">'+coach.nom+(coach.boost?' <span class="boost-badge">Boost actif</span>':'')+'</div>'+
+          '<div style="font-size:11px;color:var(--muted);margin-top:2px">'+coach.poste+' · Île-de-France</div>'+
+          '<div class="compat-wrap" style="margin-top:10px"><div class="compat-bar" style="height:8px"><div class="compat-fill" style="height:100%;width:'+pct+'%;background:'+col+'"></div></div><span style="font-size:18px;font-weight:900;color:'+col+'">'+pct+'%</span></div>'+
+          '<div style="font-size:10px;color:var(--muted)">Compatibilité avec vos critères</div>'+
+        '</div>'+
+      '</div>'+
+      '<div style="padding:12px 16px">'+
+        '<div style="background:rgba(255,165,0,0.08);border:0.5px solid rgba(255,165,0,0.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:rgba(255,180,0,0.9);line-height:1.5">'+
+          'Titre indicatif — Ces informations sont déclaratives. Le matching est un indicateur, pas une garantie. La décision finale vous appartient.'+
+        '</div>'+
+        '<div style="font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:8px">MATCHING VOS CRITÈRES</div>'+
+        mRow('Poste',coach.poste,mP)+
+        mRow('Style de jeu',coach.style,mS)+
+        mRow('Disponibilité',coach.dispo,mD)+
+        mRow('Localisation',coach.dept+' · '+coach.mobilite,mDept)+
+        mRow('Statut',coach.statut,mSt)+
+        mRow('Catégorie',coach.categorie,mC)+
+        '<div style="font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin:12px 0 8px">PROFIL COMPLET</div>'+
+        '<div class="profile-row"><span class="pk">Diplôme</span><span class="pv">'+coach.diplome+'</span></div>'+
+        '<div class="profile-row"><span class="pk">Niveau max</span><span class="pv">'+coach.niveau+'</span></div>'+
+        '<div class="contact-blocked"><span>Contact bloqué — Tél. et email masqués</span></div>'+
+        '<button class="btn-unlock">Débloquer le contact — 10 €</button>'+
+      '</div>'+
+    '</div>'+
+    '<button class="btn-submit btn-blue" onclick="closeModal()">Fermer</button>';
+  document.getElementById('modalCoach').classList.add('open');
 }
 
-function setFilter(f,el){activeFilter=f;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderCoaches();}
-function filterCoaches(val){searchQuery=val;renderCoaches();}
+function setFilter(f,el){curFilter=f;document.querySelectorAll('.fchip').forEach(function(c){c.classList.remove('active');});el.classList.add('active');renderCoaches();}
+function filterList(val){curSearch=val;renderCoaches();}
 
-function toggleChip(el,color){
-  const cls='selected-'+color;
-  if(el.parentElement.id==='chips-dispo-coach') el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove(cls));
-  el.classList.toggle(cls);
+// ABOUT HTML
+var aboutHTML='<div style="padding:20px">'+
+  '<div style="text-align:center;margin-bottom:28px">'+
+    '<div style="width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#00d4ff,#0066cc);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">'+
+      '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'+
+    '</div>'+
+    '<div style="font-size:22px;font-weight:900;color:#fff">Mercato <span style="color:#00d4ff">Staff</span></div>'+
+    '<div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px;letter-spacing:.1em">LE RÉSEAU TACTIQUE DU FOOTBALL</div>'+
+  '</div>'+
+  '<div style="background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px">'+
+    '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;color:#00d4ff;margin-bottom:8px">QUI SOMMES-NOUS</div>'+
+    '<div style="font-size:13px;color:#fff;font-weight:600;margin-bottom:6px">Plateforme de mise en relation entre coachs de football et clubs amateurs en Île-de-France.</div>'+
+    '<div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6">Nous ne sommes pas un cabinet de recrutement. Nous facilitons la rencontre — la décision finale appartient toujours aux deux parties.</div>'+
+  '</div>'+
+  '<div style="background:rgba(0,80,170,0.15);border:0.5px solid #0080cc;border-radius:12px;padding:18px;margin-bottom:12px">'+
+    '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;color:#00d4ff;margin-bottom:12px">COMMENT ÇA MARCHE</div>'+
+    '<div style="display:flex;gap:10px;margin-bottom:10px"><div style="width:26px;height:26px;border-radius:50%;background:#00d4ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#0a1628">1</div><div><div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:2px">Coach</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Remplis le questionnaire, ton profil intègre la base automatiquement.</div></div></div>'+
+    '<div style="display:flex;gap:10px"><div style="width:26px;height:26px;border-radius:50%;background:#00d4ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#0a1628">2</div><div><div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:2px">Club</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Accède à la base, consulte les profils, débloque le contact qui t\'intéresse.</div></div></div>'+
+  '</div>'+
+  '<a href="https://www.instagram.com/mercato.staff" target="_blank" style="text-decoration:none;display:block;margin-bottom:12px">'+
+    '<div style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#f77737);border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:14px">'+
+      '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>'+
+      '<div><div style="font-size:14px;font-weight:700;color:#fff">Suivez-nous sur Instagram</div><div style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:2px">@mercato.staff</div></div>'+
+      '<div style="margin-left:auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>'+
+    '</div>'+
+  '</a>'+
+  '<div style="text-align:center;padding:16px 0"><div style="font-size:12px;color:rgba(255,255,255,0.45)">75 · 77 · 78 · 91 · 92 · 93 · 94 · 95</div><div style="font-size:12px;font-weight:600;color:#00d4ff;margin-top:6px">mercato.staff@gmail.com</div><div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:12px;line-height:1.5">Mercato Staff est un service de mise en relation.<br>Pas de résultat garanti.</div></div>'+
+'</div>';
+
+function enterAs(type){
+  document.getElementById('screen-welcome').classList.remove('active');
+  document.getElementById('screen-'+type).classList.add('active');
+  if(type==='club') renderCoaches();
+  document.getElementById('about-content-coach').innerHTML=aboutHTML;
+  document.getElementById('about-content-club').innerHTML=aboutHTML;
 }
-function toggleOffre(el){el.classList.toggle('selected');}
-let selectedOffre=null;
-function selectOffre(el,id){document.querySelectorAll('.offre-card-select').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');selectedOffre=id;}
-function selectStyle(el,color){el.closest('.form-group').querySelectorAll('.style-card').forEach(c=>c.classList.remove('selected-green','selected-cyan'));el.classList.add('selected-'+color);}
-function selectStyleCyan(el){selectStyle(el,'cyan');}
 
-// Init
-renderCoaches();
+function backToWelcome(){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('screen-welcome').classList.add('active');
+}
 
+function goCoach(tab){
+  document.querySelectorAll('#screen-coach .page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('#nav-coach .nav-item').forEach(function(n){n.classList.remove('active');});
+  var tabs=['profil','notifs','boost','about'];
+  var idx=tabs.indexOf(tab);
+  var pg=document.getElementById('cp-'+tab);
+  if(!pg){goCoach('signup');return;}
+  pg.classList.add('active');
+  if(idx>=0) document.querySelectorAll('#nav-coach .nav-item')[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goClub(tab){
+  document.querySelectorAll('#screen-club .page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('#nav-club .nav-item').forEach(function(n){n.classList.remove('active');});
+  var tabs=['base','contacts','abo','about'];
+  var idx=tabs.indexOf(tab);
+  var pg=document.getElementById('clp-'+tab);
+  if(!pg){goClub('signup');return;}
+  pg.classList.add('active');
+  if(idx>=0) document.querySelectorAll('#nav-club .nav-item')[idx].classList.add('active');
+  if(tab==='base') renderCoaches();
+  window.scrollTo(0,0);
+}
+
+function solo(el,color){
+  var p=el.parentElement;
+  p.querySelectorAll('.chip').forEach(function(c){c.classList.remove('sel-green','sel-cyan');});
+  el.classList.add('sel-'+color);
+}
+function multi(el,color){el.classList.toggle('sel-'+color);}
+function soloStyle(el,color){
+  var p=el.parentElement;
+  p.querySelectorAll('.style-card').forEach(function(c){c.classList.remove('sel-green','sel-cyan');});
+  el.classList.add('sel-'+color);
+}
+function selectOff(el){
+  document.querySelectorAll('.offre-sel').forEach(function(o){o.classList.remove('active');});
+  el.classList.add('active');
+}
 function submitForm(type){
-  document.getElementById('success-icon').textContent=type==='coach'?'✅':'🏟️';
-  document.getElementById('success-title').textContent=type==='coach'?'Profil envoyé !':'Demande reçue !';
-  document.getElementById('success-text').textContent=type==='coach'?'Ton profil a bien été ajouté à la base. Tu recevras un mail de confirmation.':'Notre équipe reviendra vers vous sous 24h pour vous donner accès à la base.';
-  document.getElementById('modal-success').classList.add('open');
+  document.getElementById('sIcon').textContent=type==='coach'?'✅':'🏟';
+  document.getElementById('sTitle').textContent=type==='coach'?'Profil envoyé !':'Demande reçue !';
+  document.getElementById('sText').textContent=type==='coach'?'Ton profil a bien été ajouté à la base. Tu recevras un mail de confirmation.':'Notre équipe reviendra vers vous sous 24h pour vous donner accès à la base.';
+  document.getElementById('modalSuccess').classList.add('open');
 }
-function openCoachModal(){}
-function closeModal(){document.getElementById('modal-coach').classList.remove('open');}
-function closeSuccess(){document.getElementById('modal-success').classList.remove('open');showTab('home');}
+function closeModal(){document.getElementById('modalCoach').classList.remove('open');}
+function closeSuccess(){document.getElementById('modalSuccess').classList.remove('open');}
 </script>
 </body>
 </html>
